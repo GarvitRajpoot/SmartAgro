@@ -71,6 +71,7 @@ SmartAgro/
 │
 ├── .gitignore
 ├── README.md
+``` 
 
 ---
 
