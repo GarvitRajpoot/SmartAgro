@@ -50,6 +50,7 @@ It provides smart recommendations, real-time disease detection, and an AI assist
 
 ## 🏗️ Project Structure
 
+```text
 SmartAgro/
 │
 ├── backend/
@@ -185,21 +186,21 @@ in your browser
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home1](screenshots/Home/Home-1.png)  
-![Home2](screenshots/Home/Home-2.png)
+![Home1](Screenshots/Home/Home-1.png)  
+![Home2](Screenshots/Home/Home-2.png)
 
 ### 📝 Input Page
-![Input1](screenshots/Input/Input-1.png)  
-![Input2](screenshots/Input/Input-2.png)
+![Input1](Screenshots/Input/Input-1.png)  
+![Input2](Screenshots/Input/Input-2.png)
 
 ### 📊 Result Page
-![Result](screenshots/Result/Result.png)
+![Result](Screenshots/Result/Result.png)
 
 ### 🩺 Disease Detection
-![Disease](screenshots/Disease-Detection/Disease-Detect.png)
+![Disease](Screenshots/Disease-Detection/Disease-Detect.png)
 
 ### 🤖 Chatbot
-![Chatbot](screenshots/Chatbot/Chatbot.png)
+![Chatbot](Screenshots/Chatbot/Chatbot.png)
 
 ---
 
