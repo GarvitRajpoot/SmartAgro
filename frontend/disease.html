@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maturity Analysis — SmartAgro</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">SmartAgro</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="input.html">Enter Data</a>
+      <a href="result.html">Results</a>
+      <a href="disease.html">Maturity Analysis</a>
+      <a href="chatbot.html">Assistant</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="container">
+    <h1>Maturity Analysis</h1>
+
+    <form id="disease-form" class="upload-box">
+      <p>📷 Upload a crop image for real-time analysis...</p>
+
+      <input type="file" id="image-input" accept="image/*" class="file-input">
+      <label for="image-input" class="btn btn-secondary">Choose File</label>
+
+      <span id="file-name">No file chosen</span>
+
+      <button type="submit" class="btn">Analyze Image</button>
+    </form>
+
+    <div id="disease-result-container" style="display:none;"></div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const BACKEND = "http://127.0.0.1:8000";
+
+    const diseaseForm = document.getElementById("disease-form");
+    const imageInput = document.getElementById("image-input");
+    const fileNameSpan = document.getElementById("file-name");
+    const resultContainer = document.getElementById("disease-result-container");
+
+    // Show file name
+    imageInput.addEventListener("change", () => {
+      fileNameSpan.textContent =
+        imageInput.files.length > 0
+          ? imageInput.files[0].name
+          : "No file chosen";
+    });
+
+    // Submit
+    diseaseForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const file = imageInput.files[0];
+      if (!file) {
+        alert("Please upload an image first!");
+        return;
+      }
+
+      resultContainer.style.display = "block";
+      resultContainer.innerHTML = `
+        <div class="result-card">
+          <p class="loading-text">Analyzing image, please wait...</p>
+        </div>
+      `;
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const res = await fetch(BACKEND + "/api/detect_disease", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) throw new Error("Failed");
+
+        const data = await res.json();
+
+        const diseaseName = data.prediction || "Unknown";
+        const description = data.description || "Not available";
+        const prevention = data.prevention || "Try again";
+
+        resultContainer.innerHTML = `
+          <div class="result-card">
+            <div class="details-grid-disease">
+
+              <div class="detail-item-disease main-prediction">
+                <span class="detail-label">🔍 Analysis Result</span>
+                <h2 class="disease-name ${
+                  diseaseName.toLowerCase() === "healthy"
+                    ? "healthy"
+                    : "disease"
+                }">${diseaseName}</h2>
+              </div>
+
+              <div class="detail-item-disease">
+                <span class="detail-label">ℹ️ Description</span>
+                <p>${description}</p>
+              </div>
+
+              <div class="detail-item-disease">
+                <span class="detail-label">🛡️ Suggested Action</span>
+                <p>${prevention}</p>
+              </div>
+
+            </div>
+          </div>
+        `;
+      } catch (error) {
+        resultContainer.innerHTML = `
+          <div class="result-card empty-state">
+            <p>Error: Could not analyze the image. Please try again.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+
+  <!-- FOOTER -->
+  <footer>
+    <p style="color: aliceblue;">© 2025 SmartAgro. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

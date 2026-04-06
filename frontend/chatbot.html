@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Assistant — SmartAgro</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="chatbot.js" defer></script> <!-- ✅ JS connected -->
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">SmartAgro</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="input.html">Enter Data</a>
+      <a href="result.html">Results</a>
+      <a href="disease.html">Disease Detect</a>
+      <a href="chatbot.html">Assistant</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="container">
+    <h1>SmartAgro Assistant</h1>
+
+    <!-- Chat Box -->
+    <div class="chatbox" id="chatbox"></div>
+
+    <!-- Suggestions -->
+    <div class="suggestion-chips" id="suggestion-chips">
+      <div class="chip">Recommend a crop</div>
+      <div class="chip">What is drip irrigation?</div>
+      <div class="chip">How to prevent rust disease?</div>
+    </div>
+
+    <!-- Input -->
+    <form id="chat-form" class="chat-input">
+      <input 
+        type="text" 
+        id="message-input" 
+        placeholder="Type your question..." 
+        required 
+        autocomplete="off"
+      >
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p style="color: aliceblue;">© 2025 SmartAgro. All rights reserved.</p>
+  </footer>
+</body>
+</html>
